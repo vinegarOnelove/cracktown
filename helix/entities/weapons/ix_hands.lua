@@ -10,7 +10,7 @@ if (CLIENT) then
 end
 
 SWEP.Author = "Chessnut"
-SWEP.Instructions = 
+SWEP.Instructions = ""
 SWEP.Purpose = "Въеби ими кого - то."
 SWEP.Drop = false
 
