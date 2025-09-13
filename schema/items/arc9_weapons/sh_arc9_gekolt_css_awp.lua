@@ -1,4 +1,4 @@
-ITEM.name = "arc9_gekolt_css_awp"
+ITEM.name = "Aldric-38"
 ITEM.description = ""
 ITEM.model = "models/weapons/geckololt_css/c_awp.mdl"
 ITEM.class = "arc9_gekolt_css_awp"
