@@ -2,7 +2,7 @@
 if !ARC9 then return end
 
 ENT.Type = "anim"
-ENT.PrintName = "Weapon Workbench"
+ENT.PrintName = "Оружейный верстак"
 ENT.Category = "Helix - ARC9"
 ENT.Spawnable = true
 ENT.AdminOnly = true
@@ -49,7 +49,7 @@ else
             name:SizeToContents()
 
             local description = tooltip:AddRow("description")
-            description:SetText("A workbench where you can customize your weapons with attachments.")
+            description:SetText("Оружейный верстак, балуйся!")
             description:SizeToContents()
         end
     end
