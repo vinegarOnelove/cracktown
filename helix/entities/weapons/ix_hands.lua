@@ -2,7 +2,7 @@
 AddCSLuaFile()
 
 if (CLIENT) then
-	SWEP.PrintName = "Hands"
+	SWEP.PrintName = "Ручки"
 	SWEP.Slot = 0
 	SWEP.SlotPos = 1
 	SWEP.DrawAmmo = false
@@ -14,7 +14,7 @@ SWEP.Instructions = [[Primary Fire: Throw/Punch
 Secondary Fire: Knock/Pickup
 Secondary Fire + Mouse: Rotate Object
 Reload: Drop]]
-SWEP.Purpose = "Hitting things and knocking on doors."
+SWEP.Purpose = "Въеби ими кого - то."
 SWEP.Drop = false
 
 SWEP.ViewModelFOV = 45
