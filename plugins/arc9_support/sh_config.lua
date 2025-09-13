@@ -18,7 +18,7 @@ ix.config.Add("generateWeaponItems(ARC9)", false, "Whether or not ARC9 weapons w
 end,{category = "ARC9"}
 )
 
-ix.config.Add("freeAttachments(ARC9)", false, "Whether or not the ARC9 attachments are free to use, and do not require inventory items.", function(oldValue, newValue)
+ix.config.Add("freeAttachments(ARC9)", true, "Whether or not the ARC9 attachments are free to use, and do not require inventory items.", function(oldValue, newValue)
     if SERVER then
         GetConVar("arc9_free_atts"):SetBool(newValue)
     end
