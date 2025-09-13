@@ -1,6 +1,6 @@
 
-ITEM.name = "Padlock"
-ITEM.description = "A metal padlock, used to secure doors and gates. Will grant the corresponding key when placed."
+ITEM.name = "Замок"
+ITEM.description = "Металлический навесной замок, используемый для запирания дверей и калиток. При установке выдаст соответствующий ключ."
 ITEM.model = "models/props_wasteland/prison_padlock001a.mdl"
 ITEM.width = 1
 ITEM.height = 1
@@ -11,7 +11,7 @@ if (CLIENT) then
         local font = "ixSmallFont"
 
         local info = tooltip:AddRowAfter("description", "info")
-        local text = "Name: " .. self:GetData("padlockName", "Padlock")
+        local text = "Название: " .. self:GetData("padlockName", "Замок")
         info:SetText(text)
         info:SetFont(font)
         info:SizeToContents()
@@ -19,21 +19,21 @@ if (CLIENT) then
 end
 
 ITEM.functions.AName = {
-    name = "Set Name",
+    name = "Установить название замка",
     icon = "icon16/lock_edit.png",
 
     OnRun = function(item)
         local client = item.player
-        client:RequestString("Set Padlock Name", "Padlock Name", function(text)
+        client:RequestString("Установить название замка", "Название замка", function(text)
             item:SetData("padlockName", text)
-            client:Notify("Padlock name set to " .. text .. ".")
-        end, item:GetData("padlockName", "Padlock"))
+            client:Notify("Замок назван " .. text .. ".")
+        end, item:GetData("padlockName", "Замок"))
         return false
     end
 }
 
 ITEM.functions.BPlace = {
-    name = "Place",
+    name = "Повесить",
     icon = "icon16/lock_go.png",
 
     OnRun = function(item)
@@ -43,7 +43,7 @@ ITEM.functions.BPlace = {
             data.endpos = data.start + client:GetAimVector() * 96
             data.filter = client
         local lock = scripted_ents.Get("ix_padlock"):SpawnFunction(client, util.TraceLine(data))
-        local name = item:GetData("padlockName", "Padlock")
+        local name = item:GetData("padlockName", "Замок")
 
         if IsValid(lock) then
             client:EmitSound("physics/metal/weapon_impact_soft2.wav", 75, 80)

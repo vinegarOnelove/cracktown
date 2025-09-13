@@ -68,9 +68,9 @@ if (SERVER) then
         local door = trace.Entity
 
         if (!IsValid(door) or !door:IsDoor()) then
-            return client:Notify("You are not looking at a door!")
+            return client:Notify("Вы не смотрите на дверь!")
         elseif IsValid(door.ixLock) then
-            return client:Notify("This door already has a lock!")
+            return client:Notify("На этой двери уже замок!")
         end
 
         local normal = client:GetEyeTrace().HitNormal:Angle()
@@ -177,11 +177,11 @@ if (SERVER) then
             local time = ix.config.Get("doorLockTime", 1)
 
             if self:GetLocked() then
-                client:SetAction("Unlocking...", time, function()
+                client:SetAction("Открываем...", time, function()
                     self:SetLocked(!self:GetLocked())
                 end)
             else
-                client:SetAction("Locking...", time, function()
+                client:SetAction("Закрываем...", time, function()
                     self:SetLocked(!self:GetLocked())
                 end)
             end

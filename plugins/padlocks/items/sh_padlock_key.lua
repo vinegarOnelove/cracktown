@@ -1,6 +1,6 @@
 
-ITEM.name = "Padlock Key"
-ITEM.description = "A key, fitted to a padlock."
+ITEM.name = "Ключ от замка"
+ITEM.description = "Ключ, подходящий под замок."
 ITEM.model = "models/props_c17/TrapPropeller_Lever.mdl"
 ITEM.width = 1
 ITEM.height = 1
@@ -16,7 +16,7 @@ end
 
 function ITEM:GetDescription()
     if !self:GetData("padlockName", nil) then
-        return "A blank, uncut key - can have a pattern copied from another key to make a duplicate."
+        return "Нетронутый ключ - можно скопировать шаблон с другого ключа, чтобы сделать дубликат.."
     else
         return self.description
     end
@@ -32,7 +32,7 @@ ITEM.functions.combine = {
         clonedTo:SetData("padlockName", name)
         clonedTo:SetData("padlock", cloned:GetData("padlock", nil))
 
-        cloned.player:Notify("Created a copy of key '" .. name .. "'.")
+        cloned.player:Notify("Создана копия ключа '" .. name .. "'.")
 
         return false
     end,
@@ -49,7 +49,7 @@ if (CLIENT) then
             local font = "ixSmallFont"
 
             local info = tooltip:AddRowAfter("description", "info")
-            local text = "Opens: " .. linked
+            local text = "Открывает: " .. linked
             info:SetText(text)
             info:SetFont(font)
             info:SizeToContents()
