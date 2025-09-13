@@ -10,10 +10,7 @@ if (CLIENT) then
 end
 
 SWEP.Author = "Chessnut"
-SWEP.Instructions = [[Primary Fire: Throw/Punch
-Secondary Fire: Knock/Pickup
-Secondary Fire + Mouse: Rotate Object
-Reload: Drop]]
+SWEP.Instructions = 
 SWEP.Purpose = "Въеби ими кого - то."
 SWEP.Drop = false
 
