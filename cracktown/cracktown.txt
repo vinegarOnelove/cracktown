@@ -1,8 +1,8 @@
 
-"skeleton"
+"cracktown"
 {
 	"base" 			"helix"
-	"title" 		"Skeleton"
+	"title" 		"Cracktown"
 	"author" 		"nebulous"
 	"menusystem"	"1"
 }
