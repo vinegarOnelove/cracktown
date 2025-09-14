@@ -5,7 +5,7 @@
 FACTION.name = "Жители"
 FACTION.description = "Никто не знает как они сюда попали, и никто не знает что они здесь делают. Но, факт остается фактом, они тут есть."
 FACTION.isDefault = true
-FACTION.color = Color(100, 60, 60)
+FACTION.color = Color(230, 124, 0)
 FACTION.models = {
     "models/charborg/charborg.mdl",
     "models/criken/criken.mdl"
