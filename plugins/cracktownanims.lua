@@ -9,7 +9,7 @@ ix.anim.SetModelClass("models/charborg/charborg.mdl", "player")
 ix.anim.SetModelClass("models/criken/criken.mdl", "player")
 
 --Male models
-ix.anim.SetModelClass("models/flaymi/anomaly/stalker_freedom/stalker_freedom2a_old.mdl", "player") -- Freedom
+ix.anim.SetModelClass("models/ebmage/newflesh/gnorts.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_freedom/stalker_freedom2a.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_freedom/stalker_freedom_11.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_freedom/stalker_freedom2b_old.mdl", "player") -- Freedom
