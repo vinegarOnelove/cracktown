@@ -8,10 +8,6 @@ function CLASS:OnSet(client)
 	if (character) then
 		character:SetModel("models/arachnit/random/georgian_riot_police/georgian_riot_police_player.mdl")
 		  	local inventory = character:GetInventory()
-  	local itemFilter = {"riot_shield"}
-  	if (inventory:HasItems(itemFilter)) then
-	  return
-  	else
 	  	inventory:Add("riot_shield", 1)
   	end
 end
