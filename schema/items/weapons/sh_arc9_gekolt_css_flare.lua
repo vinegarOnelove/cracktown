@@ -1,0 +1,7 @@
+ITEM.name = "Hoellenfeuer"
+ITEM.description = ""
+ITEM.model = "models/weapons/geckololt_css/c_flare.mdl"
+ITEM.class = "arc9_gekolt_css_flare"
+ITEM.weaponCategory = "Secondary"
+ITEM.width = 2
+ITEM.height = 2
