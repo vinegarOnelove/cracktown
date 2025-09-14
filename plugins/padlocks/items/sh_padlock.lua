@@ -5,6 +5,12 @@ ITEM.model = "models/props_wasteland/prison_padlock001a.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.category = "Полезное"
+ITEM.iconCam = {
+	pos = Vector(-200, 0, 0),
+	ang = Angle(0, 0, 0),
+	fov = 4.07
+}
+
 
 if (CLIENT) then
     function ITEM:PopulateTooltip(tooltip)

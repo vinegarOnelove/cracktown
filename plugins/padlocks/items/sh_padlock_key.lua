@@ -5,6 +5,12 @@ ITEM.model = "models/props_c17/TrapPropeller_Lever.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.category = "Полезное"
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 0, 0),
+	fov = 4.02
+}
+
 
 function ITEM:GetName()
     if !self:GetData("padlockName", nil) then
