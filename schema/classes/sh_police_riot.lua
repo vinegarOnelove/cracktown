@@ -7,7 +7,13 @@ function CLASS:OnSet(client)
 
 	if (character) then
 		character:SetModel("models/arachnit/random/georgian_riot_police/georgian_riot_police_player.mdl")
-	end
+		  	local inventory = character:GetInventory()
+  	local itemFilter = {"riot_shield"}
+  	if (inventory:HasItems(itemFilter)) then
+	  return
+  	else
+	  	inventory:Add("riot_shield", 1)
+  	end
 end
 
 -- This function will be called whenever the client wishes to become part of this class. If you'd rather have it so this class
