@@ -3,5 +3,5 @@ ITEM.description = ""
 ITEM.model = "models/weapons/geckololt_css/c_ak47.mdl"
 ITEM.class = "arc9_gekolt_css_ak47"
 ITEM.weaponCategory = "первичного оружия"
-ITEM.width = 4
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
