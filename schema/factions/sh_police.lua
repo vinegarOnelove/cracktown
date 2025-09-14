@@ -6,12 +6,12 @@ FACTION.name = "Полицейский департамент"
 FACTION.description = "Довольно злые люди, главное не будь особо черным!"
 FACTION.color = Color(45, 145, 210)
 FACTION.pay = 10 -- How much money every member of the faction gets paid at regular intervals.
-FACTION.weapons = {"arc9_eft_melee_taran"} -- Weapons that every member of the faction should start with.
 FACTION.isGloballyRecognized = true -- Makes it so that everyone knows the name of the characters in this faction.
 FACTION.isDefault = true
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 	inventory:Add("paxica_wricht", 1)
+	inventory:Add("melee_taran", 1)
 end
 -- Note that FACTION.models is optional. If it is not defined, it will use all the standard HL2 citizen models.
 FACTION.models = {
