@@ -4,6 +4,11 @@ ITEM.model = Model("models/gibs/antlion_gib_medium_1.mdl")
 ITEM.description = "Часть чего - то инопланетного, сытно."
 ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes up.
 ITEM.height = 1
+ITEM.iconCam = {
+	pos = Vector(106.15, 41.31, 204.19),
+	ang = Angle(60.8, 200.8, 0),
+	fov = 3.28
+}
 
 -- Items will be purchasable through the business menu. To disable the purchasing of this item, we specify ITEM.noBusiness.
 ITEM.noBusiness = true
@@ -17,9 +22,7 @@ ITEM.flag = "z" -- Only a character having a certain flag can buy this.
 ]]
 
 -- If the item is purchasable, then you'll probably want to set a price for it:
---[[
 ITEM.price = 5
-]]
 
 -- You can define additional actions for this item as such:
 ITEM.functions.Съесть = {

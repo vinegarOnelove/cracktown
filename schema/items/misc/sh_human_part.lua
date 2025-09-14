@@ -4,6 +4,11 @@ ITEM.model = Model("models/gore/larm_armgoreupperl.mdl")
 ITEM.description = "То - ли человек, то - ли кошка, съедобно."
 ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes up.
 ITEM.height = 1
+ITEM.iconCam = {
+	pos = Vector(494.95, 540.15, -100.67),
+	ang = Angle(-7.29, 227.07, 0),
+	fov = 0.76
+}
 
 -- Items will be purchasable through the business menu. To disable the purchasing of this item, we specify ITEM.noBusiness.
 ITEM.noBusiness = true
@@ -17,9 +22,7 @@ ITEM.flag = "z" -- Only a character having a certain flag can buy this.
 ]]
 
 -- If the item is purchasable, then you'll probably want to set a price for it:
---[[
 ITEM.price = 5
-]]
 
 -- You can define additional actions for this item as such:
 ITEM.functions.Съесть = {
