@@ -39,62 +39,62 @@ PLUGIN.list = {
     ['models/criken/criken.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'riot_shield'}
+        items = {'human_part'}
     },
-    ['models/player/zelpa/male_02.mdl'] = {
+    ['models/player/gpd/sheriff_ancient/male_04.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
-    ['models/player/zelpa/male_03.mdl'] = {
+    ['models/player/gpd/sheriff_ancient/male_06.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
-    ['models/player/zelpa/male_04.mdl'] = {
+    ['models/player/gpd/sheriff_ancient/male_07.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
-    ['models/player/zelpa/male_05.mdl'] = {
+    ['models/player/gpd/sheriff_ancient/male_08.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
-    ['models/player/zelpa/male_06.mdl'] = {
+    ['models/player/gpd/sheriff_ancient/male_gta_02.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
-    ['models/player/zelpa/male_07.mdl'] = {
+    ['models/arachnit/random/georgian_riot_police/georgian_riot_police_player.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
-    ['models/player/zelpa/male_08.mdl'] = {
+    ['models/charborg/charborg.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
-    ['models/player/zelpa/male_09.mdl'] = {
+    ['models/ebmage/newflesh/gnorts.mdl'] = {
         butcheringTime = 10,
-        impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        impactEffect = "AntlionGib",
+        items = {'human_part'}
     },
     ['models/player/zelpa/male_10.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
     ['models/player/zelpa/female_01.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
     ['models/player/zelpa/female_02.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'human_part'}
     },
     ['models/player/zelpa/female_03.mdl'] = {
         butcheringTime = 10,
