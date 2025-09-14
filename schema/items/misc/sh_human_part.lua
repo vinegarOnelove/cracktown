@@ -28,6 +28,7 @@ ITEM.functions.Съесть = {
 
 		client:SetHealth(math.min(client:Health() - 25, client:GetMaxHealth()))
 		client:EmitSound("physics/flesh/flesh_squishy_impact_hard1.wav", 75, 90, 0.35)
+		client:EmitSound("vo/ravenholm/madlaugh01.wav", 75, 90, 0.35)
 		return true
 	end,
 }

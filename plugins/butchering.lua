@@ -79,7 +79,7 @@ PLUGIN.list = {
     ['models/ebmage/newflesh/gnorts.mdl'] = {
         butcheringTime = 10,
         impactEffect = "AntlionGib",
-        items = {'human_part'}
+        items = {'alien_part'}
     },
     ['models/player/zelpa/male_10.mdl'] = {
         butcheringTime = 10,
