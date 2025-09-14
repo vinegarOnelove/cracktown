@@ -1,7 +1,7 @@
 
-ITEM.name = "Подозрительное мясо"
-ITEM.model = Model("models/gore/larm_armgoreupperl.mdl")
-ITEM.description = "То - ли человек, то - ли кошка, съедобно."
+ITEM.name = "Крысятина"
+ITEM.model = Model("models/gore/rleg_meatbit004r.mdl")
+ITEM.description = "Отвратительно, но есть можно."
 ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes up.
 ITEM.height = 1
 
@@ -26,9 +26,8 @@ ITEM.functions.Съесть = {
 	OnRun = function(itemTable)
 		local client = itemTable.player
 
-		client:SetHealth(math.min(client:Health() + 15, client:GetMaxHealth()))
+		client:SetHealth(math.min(client:Health() + 2, client:GetMaxHealth()))
 		client:EmitSound("physics/flesh/flesh_squishy_impact_hard1.wav", 75, 90, 0.35)
-		client:EmitSound("vo/ravenholm/madlaugh01.wav", 75, 90, 0.35)
 		return true
 	end,
 }

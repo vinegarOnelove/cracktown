@@ -81,40 +81,65 @@ PLUGIN.list = {
         impactEffect = "AntlionGib",
         items = {'alien_part'}
     },
-    ['models/player/zelpa/male_10.mdl'] = {
+    ['models/animalia/bighorn.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'animal_part'}
     },
-    ['models/player/zelpa/female_01.mdl'] = {
+    ['models/animalia/chicken.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'bird_part'}
     },
-    ['models/player/zelpa/female_02.mdl'] = {
+    ['models/animalia/chicken1.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'bird_part'}
     },
-    ['models/player/zelpa/female_03.mdl'] = {
+    ['models/animalia/dog1.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'dog_part'}
     },
-    ['models/player/zelpa/female_04.mdl'] = {
+    ['models/animalia/dog2.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'dog_part'}
     },
-    ['models/player/zelpa/female_06.mdl'] = {
+    ['models/animalia/gazelle.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'animal_part'}
     },
-    ['models/player/zelpa/female_07.mdl'] = {
+    ['models/animalia/npc_dog.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'humanflesh'}
+        items = {'dog_part'}
+    },
+	['models/animalia/crow.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'bird_part'}
+    },
+	['models/animalia/pigeon.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'bird_part'}
+    },
+	['models/animalia/rat.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'rat_part'}
+    },
+	['models/animalia/seagull.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'bird_part'}
+    },
+	['models/animalia/champ.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'dog_part'}
     },
     ['models/Lamarr.mdl'] = {
         butcheringTime = 5,
