@@ -5,3 +5,9 @@ ITEM.class = "arc9_gekolt_css_m4"
 ITEM.weaponCategory = "первичного оружия"
 ITEM.width = 3
 ITEM.height = 1
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 200, 0),
+	ang = Angle(1.54, 273.21, 0),
+	fov = 12.05
+}
