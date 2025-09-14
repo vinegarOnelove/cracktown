@@ -4,7 +4,7 @@ ITEM.description = "Ключ, подходящий под замок."
 ITEM.model = "models/props_c17/TrapPropeller_Lever.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.category = "Utility"
+ITEM.category = "Полезное"
 
 function ITEM:GetName()
     if !self:GetData("padlockName", nil) then

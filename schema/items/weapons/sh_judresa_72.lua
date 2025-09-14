@@ -11,3 +11,4 @@ ITEM.iconCam = {
 	ang = Angle(1.27, 273.08, 0),
 	fov = 15.98
 }
+

@@ -4,7 +4,7 @@ ITEM.description = "Металлический навесной замок, ис
 ITEM.model = "models/props_wasteland/prison_padlock001a.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.category = "Utility"
+ITEM.category = "Полезное"
 
 if (CLIENT) then
     function ITEM:PopulateTooltip(tooltip)
