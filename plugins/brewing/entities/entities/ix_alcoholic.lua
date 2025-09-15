@@ -2,8 +2,8 @@ AddCSLuaFile()
 
 ENT.Base = "base_anim"
 ENT.Type = "anim"
-ENT.PrintName = "Alcoholic"
-ENT.Category = "Overlord Community"
+ENT.PrintName = "Алкоголик"
+ENT.Category = "Helix"
 ENT.Spawnable = true
 ENT.RenderGroup = RENDERGROUP_BOTH
 ENT.AutomaticFrameAdvance = true
@@ -30,11 +30,11 @@ if SERVER then
 		if moonshine then
 			local money = char:GetMoney()
 			local finalPrice = GetFinalPrice(moonshine:GetData("quality", 0))
-			char:SetMoney(money + finalPrice)
+			char:GiveMoney(100 + finalPrice)
 			moonshine:Remove()
-			act:Notify("You have received " .. finalPrice .. " tokens")
+			act:Notify("Вы получили сотню за свою работу!")
 		else
-			act:Notify("Oi mate! Feck off, you haven't got me moonshine!")
+			act:Notify("Мля, отъебись! У тебя нету самогонки!")
 		end
 	end
 end
