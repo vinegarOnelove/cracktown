@@ -9,7 +9,7 @@ FACTION.color = Color(205, 205, 205)
 FACTION.models = {
     "models/ebmage/newflesh/gnorts.mdl"
 }
-
+FACTION.business = true
 -- You should define a global variable for this faction's index for easy access wherever you need. FACTION.index is
 -- automatically set, so you can simply assign the value.
 
