@@ -223,7 +223,7 @@ if (SERVER) then
                 local HitPos = client:GetEyeTraceNoCursor()
                 local target = HitPos.Entity
                 if target and IsValid(target) and target:IsRagdoll() and self.list[target:GetModel()] then
-                    local allowedWeapons = self.list[target:GetModel()].butcheringWeapons or {'arc9_eft_melee_wycc','arc9_eft_melee_voodoo','arc9_eft_melee_kiba','arc9_eft_melee_cultist','arc9_eft_melee_camper','arc9_eft_melee_wycc'}
+                    local allowedWeapons = self.list[target:GetModel()].butcheringWeapons or {'arc9_eft_melee_wycc','arc9_eft_melee_voodoo','arc9_eft_melee_kiba','arc9_eft_melee_cultist','arc9_eft_melee_camper','arc9_eft_melee_wycc','arc9_eft_melee_6x5','arc9_eft_melee_fulcrum','arc9_eft_melee_m2','arc9_eft_melee_crash','arc9_eft_melee_sp8','arc9_eft_melee_gladius','arc9_eft_melee_a2607d','arc9_eft_melee_a2607','arc9_eft_melee_akula','arc9_eft_melee_kukri','arc9_eft_melee_taiga'}
                     local canButch = hook.Run('CanButchEntity', client, target)
                     if ( table.HasValue(allowedWeapons, client:GetActiveWeapon():GetClass()) and !target:GetNetVar('cutting', false) and client:IsWepRaised() and canButch ) then
                         local butchAnim = self.list[target:GetModel()].animation or "Roofidle1"
