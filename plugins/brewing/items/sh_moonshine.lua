@@ -81,7 +81,7 @@ ITEM.functions.Consume = {
                         "Деревенская сила!",
                         "Хозяин в доме!"
                     }
-                    client:ChatPrint(table.Random(phrases))
+                    ix.chat.Send(client, "ic", table.Random(messages))
                 end
             end)
         end
@@ -227,7 +227,7 @@ hook.Add("Think", "SamogonVillageMessages", function()
                     "Ещё по одной?",
                     "За здоровье не пить!"
                 }
-                client:ChatPrint(table.Random(messages))
+                ix.chat.Send(client, "ic", table.Random(messages))
             end
         end
     end

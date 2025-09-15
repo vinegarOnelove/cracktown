@@ -73,7 +73,7 @@ ITEM.functions.Consume = {
                         "Для истинных ценителей...",
                         "Элегантно и крепко..."
                     }
-                    client:ChatPrint(table.Random(phrases))
+                    ix.chat.Send(client, "ic", table.Random(messages))
                 end
             end)
         end
@@ -197,7 +197,7 @@ hook.Add("Think", "GinElegantMessages", function()
                     "Для тех, кто ценит тонкий вкус...",
                     "Элегантное опьянение..."
                 }
-                client:ChatPrint(table.Random(messages))
+                ix.chat.Send(client, "ic", table.Random(messages))
             end
         end
     end

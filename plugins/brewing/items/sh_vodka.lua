@@ -218,7 +218,7 @@ hook.Add("Think", "VodkaPatrioticMessages", function()
                     "Слава партии!",
                     "Коммунизм победит!"
                 }
-                client:ChatPrint(table.Random(messages))
+                ix.chat.Send(client, "ic", table.Random(messages))
             end
         end
     end

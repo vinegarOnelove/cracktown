@@ -82,7 +82,7 @@ ITEM.functions.Consume = {
                         "Дорогой напиток для дорогих мыслей...",
                         "Время течет как виски по стеклу..."
                     }
-                    client:ChatPrint(table.Random(phrases))
+                    ix.chat.Send(client, "ic", table.Random(messages))
                 end
             end)
         end
@@ -219,7 +219,7 @@ hook.Add("Think", "WhiskeyPhilosophicalMessages", function()
                     "Дорогие напитки для дорогих воспоминаний...",
                     "Время, проведенное в одиночестве, не бывает потрачено зря..."
                 }
-                client:ChatPrint(table.Random(messages))
+                ix.chat.Send(client, "ic", table.Random(messages))
             end
         end
     end
