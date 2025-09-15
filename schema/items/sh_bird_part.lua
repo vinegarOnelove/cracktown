@@ -4,6 +4,13 @@ ITEM.model = Model("models/gore/rleg_meatbit004r.mdl")
 ITEM.description = "Куски перьев, куски мяса, есть можно."
 ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes up.
 ITEM.height = 1
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(157.07, -87.89, 34.95),
+	ang = Angle(13.55, 151.42, 0),
+	fov = 2.82
+}
+
 
 -- Items will be purchasable through the business menu. To disable the purchasing of this item, we specify ITEM.noBusiness.
 ITEM.noBusiness = true
