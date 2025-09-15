@@ -173,32 +173,73 @@ if SERVER then
     util.AddNetworkString("CrackEffectStart")
     util.AddNetworkString("CrackEffectEnd")
     
-    -- Хук для сброса эффектов при смерти
-    hook.Add("PlayerDeath", "CrackEffectDeathReset", function(client)
+    -- УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ДЛЯ СБРОСА ЭФФЕКТОВ
+    local function ResetCrackEffects(client)
+        if not IsValid(client) then return end
+        
+        local effectID = "crack_effect_" .. client:SteamID()
+        
+        -- Если эффект активен, сбрасываем его
         if client:GetNetVar("crackActive", false) then
             local item = ix.item.list["crack_cocaine"]
             if item then
                 item:RemoveCrackEffects(client)
+            else
+                -- Если предмет не найден, сбрасываем вручную
+                local oldRunSpeed = client:GetNetVar("crackOldRunSpeed", ix.config.Get("runSpeed", 300))
+                local oldWalkSpeed = client:GetNetVar("crackOldWalkSpeed", ix.config.Get("walkSpeed", 150))
+                local oldJumpPower = client:GetNetVar("crackOldJumpPower", ix.config.Get("jumpPower", 200))
+                
+                client:SetRunSpeed(oldRunSpeed)
+                client:SetWalkSpeed(oldWalkSpeed)
+                client:SetJumpPower(oldJumpPower)
+                client:SetNetVar("crackActive", false)
+                
+                -- Отправляем клиенту о завершении эффекта
+                net.Start("CrackEffectEnd")
+                net.Send(client)
             end
         end
+        
+        -- Удаляем все связанные таймеры
+        if timer.Exists(effectID) then
+            timer.Remove(effectID)
+        end
+        
+        for i = 1, 10 do
+            local sideTimerID = effectID .. "_side_" .. i
+            if timer.Exists(sideTimerID) then
+                timer.Remove(sideTimerID)
+            end
+        end
+    end
+    
+    -- Хук для сброса эффектов при смерти
+    hook.Add("PlayerDeath", "CrackEffectDeathReset", function(client)
+        ResetCrackEffects(client)
+    end)
+    
+    -- Хук для сброса эффектов при возрождении
+    hook.Add("PlayerSpawn", "CrackEffectSpawnReset", function(client)
+        ResetCrackEffects(client)
     end)
     
     -- Хук для сброса эффектов при дисконнекте
     hook.Add("PlayerDisconnected", "CrackEffectDisconnectReset", function(client)
-        local effectID = "crack_effect_" .. client:SteamID()
-        if timer.Exists(effectID) then
-            timer.Remove(effectID)
-        end
+        ResetCrackEffects(client)
     end)
     
     -- Хук для сброса эффектов при смене персонажа
     hook.Add("PlayerLoadedCharacter", "CrackEffectCharReset", function(client)
+        ResetCrackEffects(client)
+    end)
+    
+    -- Хук для сброса эффектов при изменении скорости извне
+    hook.Add("PlayerSpeedChanged", "CrackEffectSpeedReset", function(client, newRunSpeed, newWalkSpeed)
         if client:GetNetVar("crackActive", false) then
-            client:SetNetVar("crackActive", false)
-            local effectID = "crack_effect_" .. client:SteamID()
-            if timer.Exists(effectID) then
-                timer.Remove(effectID)
-            end
+            -- Если эффект активен и скорость изменена извне, сбрасываем эффект
+            ResetCrackEffects(client)
+            client:Notify("Эффект крэка прерван из-за изменения скорости!")
         end
     end)
 else
