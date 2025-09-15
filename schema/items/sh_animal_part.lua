@@ -4,6 +4,12 @@ ITEM.model = Model("models/gore/uppertorso_lowerrightribs.mdl")
 ITEM.description = "Только - что из кого - то вырезанное, вкуснятина!"
 ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes up.
 ITEM.height = 1
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-61.05, -50.07, 183.84),
+	ang = Angle(66.61, 39.67, 0),
+	fov = 3.23
+}
 
 -- Items will be purchasable through the business menu. To disable the purchasing of this item, we specify ITEM.noBusiness.
 ITEM.noBusiness = true

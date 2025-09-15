@@ -4,6 +4,12 @@ ITEM.model = Model("models/gibs/antlion_gib_medium_1.mdl")
 ITEM.description = "Часть чего - то инопланетного, сытно."
 ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes up.
 ITEM.height = 1
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-124.6, -39.37, 151.41),
+	ang = Angle(49.2, 17.8, 0),
+	fov = 4.32
+}
 
 -- Items will be purchasable through the business menu. To disable the purchasing of this item, we specify ITEM.noBusiness.
 ITEM.noBusiness = true

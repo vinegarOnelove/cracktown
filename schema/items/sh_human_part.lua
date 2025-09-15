@@ -4,6 +4,12 @@ ITEM.model = Model("models/gore/larm_armgoreupperl.mdl")
 ITEM.description = "То - ли человек, то - ли кошка, съедобно."
 ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes up.
 ITEM.height = 1
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(118.55, 105.9, 66.86),
+	ang = Angle(25.6, 219.74, 0),
+	fov = 3.76
+}
 
 -- Items will be purchasable through the business menu. To disable the purchasing of this item, we specify ITEM.noBusiness.
 ITEM.noBusiness = true

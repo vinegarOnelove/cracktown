@@ -4,6 +4,12 @@ ITEM.model = Model("models/gore/head_headbitbackright.mdl")
 ITEM.description = "Недавно гавкало, съедобно."
 ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes up.
 ITEM.height = 1
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-67.76, -90.84, 164.79),
+	ang = Angle(55.48, 53.28, 0),
+	fov = 1.72
+}
 
 -- Items will be purchasable through the business menu. To disable the purchasing of this item, we specify ITEM.noBusiness.
 ITEM.noBusiness = true
