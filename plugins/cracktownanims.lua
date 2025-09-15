@@ -11,7 +11,7 @@ ix.anim.SetModelClass("models/criken/criken.mdl", "player")
 --Male models
 ix.anim.SetModelClass("models/arachnit/random/georgian_riot_police/georgian_riot_police_player.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/ebmage/newflesh/gnorts.mdl", "player") -- Freedom
-ix.anim.SetModelClass("models/flaymi/anomaly/stalker_freedom/stalker_freedom_11.mdl", "player") -- Freedom
+ix.anim.SetModelClass("models/humans/group03/chemsuit.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_freedom/stalker_freedom2b_old.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_freedom/stalker_freedom_2_old.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_freedom/stalker_freedom1a.mdl", "player") -- Freedom

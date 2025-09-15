@@ -76,6 +76,11 @@ PLUGIN.list = {
         impactEffect = "BloodImpact",
         items = {'human_part'}
     },
+	['models/humans/group03/chemsuit.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part'}
+    },
     ['models/ebmage/newflesh/gnorts.mdl'] = {
         butcheringTime = 10,
         impactEffect = "AntlionGib",
