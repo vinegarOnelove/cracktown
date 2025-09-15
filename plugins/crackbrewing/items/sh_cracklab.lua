@@ -6,6 +6,12 @@ ITEM.skin = 0
 ITEM.width = 2
 ITEM.height = 2
 ITEM.price = 100
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(334.99, 281.25, 217.62),
+	ang = Angle(25.12, 219.94, 0),
+	fov = 4.94
+}
 
 ITEM.functions.SimplePlace = {
     name = "Установить лабораторию",

@@ -6,6 +6,12 @@ ITEM.height = 1
 ITEM.category = "Наркотики"
 ITEM.price = 500
 ITEM.noBusiness = true
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(253.12, 1.25, 418.01),
+	ang = Angle(58.88, 180.28, 0),
+	fov = 0.35
+}
 
 ITEM.functions.Use = {
     name = "Употребить",

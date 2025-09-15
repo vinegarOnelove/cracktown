@@ -4,6 +4,12 @@ ITEM.description = "Продукт красного оттенка, что - т�
 ITEM.width = 1
 ITEM.height = 1
 ITEM.category = "Наркотики";
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(216.3, 188.05, 395.71),
+	ang = Angle(54.05, 220.89, 0),
+	fov = 0.81
+}
 
 ITEM.functions.Use = {
     name = "Употребить",
