@@ -99,7 +99,7 @@ function ITEM:ApplyCrackEffects(client)
                     
                 elseif effectType == 2 then
                     -- Дезориентация
-                    client:ViewPunch(Angle(math.random(-5, 5), math.random(-5, 5), math.random(-5, 5)))
+                    client:ViewPunch(Angle(math.random(-5, 90), math.random(-5, 90), math.random(-5, 90)))
                     client:SetDSP(34)
                     client:Notify("Головокружение! Теряю ориентацию!")
                     
