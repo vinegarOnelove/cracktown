@@ -3,7 +3,7 @@ ITEM.description = "Сильнодействующий наркотик, выз�
 ITEM.model = "models/jellik/cocaine.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.category = "Drugs"
+ITEM.category = "Наркотики"
 ITEM.price = 500
 ITEM.noBusiness = true
 
@@ -99,7 +99,7 @@ function ITEM:ApplyCrackEffects(client)
                     
                 elseif effectType == 2 then
                     -- Дезориентация
-                    client:ViewPunch(Angle(math.random(-5, 90), math.random(-5, 90), math.random(-5, 90)))
+                    client:ViewPunch(Angle(math.random(-180, 180), math.random(-180, 180), math.random(-180, 180)))
                     client:SetDSP(34)
                     client:Notify("Головокружение! Теряю ориентацию!")
                     
@@ -223,11 +223,11 @@ else
             -- Умеренный цветовой эффект
             DrawColorModify({
                 ["$pp_colour_addr"] = 0.1,
-                ["$pp_colour_addg"] = 0.2,
-                ["$pp_colour_addb"] = 0,
-                ["$pp_colour_brightness"] = 0.05,
-                ["$pp_colour_contrast"] = 1.3,
-                ["$pp_colour_colour"] = 1.4,
+                ["$pp_colour_addg"] = 0.3,
+                ["$pp_colour_addb"] = 0.1,
+                ["$pp_colour_brightness"] = 0.07,
+                ["$pp_colour_contrast"] = 1.4,
+                ["$pp_colour_colour"] = 1.5,
                 ["$pp_colour_mulr"] = 0,
                 ["$pp_colour_mulg"] = 0.4,
                 ["$pp_colour_mulb"] = 0
@@ -241,9 +241,9 @@ else
             -- Умеренное дрожание камеры
             if math.random(1, 100) <= 20 then
                 ply:ViewPunch(Angle(
-                    math.random(-0.8, 0.8),
-                    math.random(-0.8, 0.8),
-                    math.random(-0.8, 0.8)
+                    math.random(-1, 1),
+                    math.random(-1, 1),
+                    math.random(-1, 1)
                 ))
             end
             
