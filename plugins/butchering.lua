@@ -39,47 +39,47 @@ PLUGIN.list = {
     ['models/criken/criken.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
     ['models/player/gpd/sheriff_ancient/male_04.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
     ['models/player/gpd/sheriff_ancient/male_06.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
     ['models/player/gpd/sheriff_ancient/male_07.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
     ['models/player/gpd/sheriff_ancient/male_08.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
     ['models/player/gpd/sheriff_ancient/male_gta_02.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
     ['models/arachnit/random/georgian_riot_police/georgian_riot_police_player.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
     ['models/charborg/charborg.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
 	['models/humans/group03/chemsuit.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'human_part'}
+        items = {'human_part','human_brain'}
     },
     ['models/ebmage/newflesh/gnorts.mdl'] = {
         butcheringTime = 10,

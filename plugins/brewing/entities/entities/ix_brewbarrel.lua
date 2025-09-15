@@ -2,12 +2,13 @@ AddCSLuaFile()
 
 local PLUGIN = PLUGIN;
 
-ENT.Base = "base_entity";
+ENT.Base = "base_anim";
 ENT.Type = "anim";
 ENT.PrintName = "Brewing Barrel";
 ENT.Category = "Helix";
 ENT.Spawnable = true;
 ENT.RenderGroup = RENDERGROUP_BOTH;
+ENT.AutomaticFrameAdvance = true;
 
 -- Настройки здоровья бочки
 ENT.MaxHealth = 200
@@ -26,11 +27,25 @@ local comboRisk = {
   ["whiskeyspecialwater"] = 4
 };
 
+-- Локализация статусов для бочки
+PLUGIN.barrelStatusText = PLUGIN.barrelStatusText or {
+    ["Idle"] = "Пустая",
+    ["Brewing"] = "Варка...",
+    ["Finished"] = "Готово!"
+}
+
+function ENT:SetupDataTables()
+    self:NetworkVar("String", 0, "Status")
+    self:NetworkVar("Int", 1, "Health")
+    self:NetworkVar("Int", 2, "MaxHealth")
+end
+
 if SERVER then
   function ENT:Initialize()
     self:SetModel("models/props/de_inferno/wine_barrel.mdl");
     self:SetSolid(SOLID_VPHYSICS);
     self:PhysicsInit(SOLID_VPHYSICS);
+    self:SetUseType(SIMPLE_USE);
 
     local physObj = self:GetPhysicsObject()
 
@@ -45,12 +60,6 @@ if SERVER then
     
     self:SetStatus("Idle");
   end;
-
-  function ENT:SetupDataTables()
-    self:NetworkVar("String", 0, "Status")
-    self:NetworkVar("Int", 1, "Health")
-    self:NetworkVar("Int", 2, "MaxHealth")
-  end
 
   -- Функция для нанесения урона
   function ENT:OnTakeDamage(dmg)
@@ -195,9 +204,9 @@ if SERVER then
                 end
               end
             end
-          end)
-
-          return
+            end)
+            
+            return
         end
       end
 
@@ -227,7 +236,116 @@ if SERVER then
 end
 
 if CLIENT then
+  -- Глобальные функции для безопасного доступа
+  function SafeGetClass(ent)
+      if not IsValid(ent) then return "invalid" end
+      if not isfunction(ent.GetClass) then return "no_getclass" end
+      return ent:GetClass() or "unknown"
+  end
+
+  function SafeGetStatus(ent)
+      if not IsValid(ent) then return "invalid" end
+      if not isfunction(ent.GetStatus) then return "no_getstatus" end
+      return ent:GetStatus() or "unknown"
+  end
+
+  function ENT:Initialize()
+      self.statusInitialized = false
+      self.lastStatusCheck = 0
+  end
+
+  function ENT:Think()
+      if CurTime() > self.lastStatusCheck + 1 then
+          self.lastStatusCheck = CurTime()
+          
+          if isfunction(self.GetStatus) and self:GetStatus() then
+              self.statusInitialized = true
+          end
+      end
+      
+      self:NextThink(CurTime() + 0.5)
+      return true
+  end
+
   function ENT:Draw()
-    self:DrawModel();
-  end;
-end;
+      self:DrawModel()
+      
+      if not self.statusInitialized then return end
+      
+      local distance = self:GetPos():Distance(LocalPlayer():GetPos())
+      if distance > 300 then return end
+      
+      local status = SafeGetStatus(self)
+      local localizedStatus = PLUGIN.barrelStatusText[status] or status
+      
+      local ang = self:GetAngles()
+      ang:RotateAroundAxis(ang:Up(), 90)
+      ang:RotateAroundAxis(ang:Forward(), 90)
+      
+      -- Единый стиль: Выше и с небольшим смещением вперед
+      local pos = self:GetPos() + self:GetUp() * 70 + self:GetForward() * 5
+      
+      cam.Start3D2D(pos, ang, 0.1)
+          -- Фон с закругленными углами (единый стиль)
+          draw.RoundedBox(8, -50, -20, 100, 35, Color(0, 0, 0, 230))
+          
+          -- Рамка в зависимости от статуса (единый стиль)
+          if status == "Brewing" then
+              surface.SetDrawColor(255, 150, 0, 255)
+          elseif status == "Finished" then
+              surface.SetDrawColor(0, 255, 0, 255)
+          else
+              surface.SetDrawColor(150, 150, 150, 255)
+          end
+          surface.DrawOutlinedRect(-50, -20, 100, 35, 2)
+          
+          -- Текст статуса с жирным шрифтом (единый стиль)
+          draw.SimpleText(localizedStatus, "DermaDefaultBold", 0, 0, 
+              color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+              
+          -- Иконка для статуса варки (единый стиль)
+          if status == "Brewing" then
+              draw.SimpleText("⚡", "DermaDefault", 40, -15, 
+                  Color(255, 200, 0), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+          end
+      cam.End3D2D()
+  end
+
+  -- Исправленный хук с защитными проверками (единый стиль)
+  hook.Add("PopulateEntityInfo", "ixBrewBarrelInfo", function(tooltip, ent)
+      -- 🔥 ЗАЩИТНЫЕ ПРОВЕРКИ
+      if not IsValid(ent) then return end
+      if not isfunction(ent.GetClass) then return end
+      if SafeGetClass(ent) ~= "ix_brewbarrel" then return end
+      
+      if not isfunction(ent.GetStatus) then return end
+      
+      local status = SafeGetStatus(ent)
+      local localizedStatus = PLUGIN.barrelStatusText[status] or status
+      
+      -- Заголовок (единый стиль)
+      local name = tooltip:AddRow("name")
+      name:SetText("Бочка для варки алкоголя")
+      name:SetBackgroundColor(Color(100, 50, 20))
+      name:SetImportant()
+      name:SizeToContents()
+      
+      -- Статус (единый стиль)
+      local statusRow = tooltip:AddRow("status")
+      statusRow:SetText("Статус: " .. localizedStatus)
+      statusRow:SetBackgroundColor(Color(50, 25, 10))
+      statusRow:SizeToContents()
+      -- Дополнительная информация (единый стиль)
+      if status == "Brewing" then
+          local info = tooltip:AddRow("info")
+          info:SetText("Идет процесс варки алкоголя...")
+          info:SetBackgroundColor(Color(80, 40, 0))
+          info:SizeToContents()
+      elseif status == "Finished" then
+          local info = tooltip:AddRow("info")
+          info:SetText("Нажмите E чтобы забрать готовый продукт")
+          info:SetBackgroundColor(Color(0, 80, 0))
+          info:SizeToContents()
+      end
+  end)
+end
