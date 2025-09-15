@@ -1,7 +1,7 @@
 CLASS.name = "Варщик"
 CLASS.faction = FACTION_CITIZEN
 CLASS.isDefault = false
-CLASS.limit = 1
+CLASS.limit = 2
 
 function CLASS:OnSet(client)
     local character = client:GetCharacter()
