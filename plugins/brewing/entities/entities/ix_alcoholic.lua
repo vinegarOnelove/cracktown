@@ -30,7 +30,7 @@ if SERVER then
 		if moonshine then
 			local money = char:GetMoney()
 			local finalPrice = GetFinalPrice(moonshine:GetData("quality", 0))
-			char:GiveMoney(100 + finalPrice)
+			char:GiveMoney(125 + finalPrice)
 			moonshine:Remove()
 			act:Notify("Вы получили сотню за свою работу!")
 		else
@@ -48,4 +48,23 @@ end
 function ENT:Think()
 	self:NextThink(CurTime())
 	return true
+end
+
+if CLIENT then
+    function PLUGIN:PopulateEntityInfo(ent, tooltip)
+        if ent:GetClass() ~= "ix_alcoholic" then return end
+
+        -- Заголовок
+        local name = tooltip:AddRow("name")
+        name:SetText("Бочка для варки")
+        name:SetBackgroundColor(Color(100, 50, 20))
+        name:SetImportant()
+        name:SizeToContents()
+
+        -- Статус (безопасно получаем)
+        local state = "Idle"
+        if isfunction(ent.GetStatus) then
+            state = ent:GetStatus() or "Idle"
+        end
+    end
 end
