@@ -15,10 +15,10 @@ PLUGIN.recipes = {
         heat = "medium"
     },
     ["crack_pro"] = {
-        input = {"ammonia", "cocaine", "ether"},
-        output = "crack_pure",
+        input = {"baking_soda", "cocaine", "human_brain"},
+        output = "crack_meat",
         time = 240,
-        risk = 35,
+        risk = 30,
         stages = 4,
         heat = "high"
     },
