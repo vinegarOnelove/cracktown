@@ -8,7 +8,11 @@ FACTION.isDefault = true
 FACTION.color = Color(230, 124, 0)
 FACTION.models = {
     "models/charborg/charborg.mdl",
-    "models/criken/criken.mdl"
+    "models/criken/criken.mdl",
+	"models/mrduck/sentry/gangs/redneck/mapert_08.mdl",
+	"models/mrduck/sentry/gangs/redneck/mapert_06.mdl",
+	"models/mrduck/sentry/gangs/redneck/mapert_04.mdl",
+	"models/mrduck/sentry/gangs/redneck/mapert_02.mdl"
 }
 
 -- You should define a global variable for this faction's index for easy access wherever you need. FACTION.index is

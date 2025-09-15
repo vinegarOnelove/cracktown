@@ -19,7 +19,7 @@ FACTION.models = {
 	"models/player/gpd/sheriff_ancient/male_06.mdl",
 	"models/player/gpd/sheriff_ancient/male_07.mdl",
 	"models/player/gpd/sheriff_ancient/male_08.mdl",
-	"models/player/gpd/sheriff_ancient/male_gta_02.mdl"
+	"models/player/gpd/sheriff_ancient/male_03.mdl"
 	
 }
 

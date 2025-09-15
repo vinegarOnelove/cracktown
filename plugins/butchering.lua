@@ -56,6 +56,92 @@ PLUGIN.list = {
         impactEffect = "BloodImpact",
         items = {'human_part','human_brain'}
     },
+	['models/player/gpd/sheriff_ancient/male_03.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+    },
+	['models/mrduck/sentry/gangs/redneck/mapert_08.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+    },
+	['models/mrduck/sentry/gangs/redneck/mapert_06.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+    },
+	['models/mrduck/sentry/gangs/redneck/mapert_04.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+    },
+	['models/mrduck/sentry/gangs/redneck/mapert_02.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/drem/cch/male_04.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/drem/cch/male_07.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/drem/cch/male_08.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['"models/drem/cch/male_09.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/drem/cch/male_02.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/mrduck/sentry/gangs/italian/male_07_shirt_tie.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/mrduck/sentry/gangs/italian/male_08_closed_tie.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/mrduck/sentry/gangs/italian/male_06_shirt_tie.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/mrduck/sentry/gangs/italian/male_09_shirt_tie.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
+	['models/mrduck/sentry/gangs/italian/male_06_closed_tie.mdl'] = {
+        butcheringTime = 10,
+        impactEffect = "BloodImpact",
+        items = {'human_part','human_brain'}
+		
+    },
     ['models/player/gpd/sheriff_ancient/male_08.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",

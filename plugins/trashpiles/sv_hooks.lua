@@ -5,13 +5,18 @@ PLUGIN.trashModels = {
     'models/props_junk/garbage128_composite001a.mdl',
     'models/props_junk/garbage128_composite001b.mdl',
     'models/props_junk/garbage128_composite001c.mdl',
-	'models/props_junk/TrashBin01a.mdl',
-	'models/props_junk/TrashDumpster01a.mdl',
     'models/props_junk/garbage128_composite001d.mdl'
 }
 PLUGIN.BadItemTypes = {
     'water',
-    'cocaine'
+    'cocaine',
+	'vodka',
+	'baking_soda',
+	'ammonia',
+	'soda',
+	'energetic',
+	'whiskey',
+	'moonshine'
 }
 
 function PLUGIN:InitializedPlugins()

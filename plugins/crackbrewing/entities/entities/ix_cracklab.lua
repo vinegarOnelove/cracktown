@@ -68,7 +68,7 @@ if SERVER then
         if self.Destroyed then return end
         self.Destroyed = true
 
-        self:StopSound("ambient/machines/steam_loop_1.wav")
+        self:StopSound("ambient/fire/fire_small_loop1.wav")
         
         util.BlastDamage(self, attacker or self, self:GetPos(), PLUGIN.config.explosionRadius, PLUGIN.config.explosionDamage)
         
@@ -94,7 +94,7 @@ if SERVER then
         self.currentRecipe = recipe
         self.riskModifier = PLUGIN.heatLevels[recipe.heat].risk_mod
 
-        self:EmitSound("ambient/machines/steam_loop_1.wav", PLUGIN.config.soundVolume, 100)
+        self:EmitSound("ambient/fire/fire_small_loop1.wav", PLUGIN.config.soundVolume, 100)
 
         local stageTime = recipe.time / recipe.stages
         
@@ -119,7 +119,7 @@ if SERVER then
 
     function ENT:FailCooking(ply, reason)
         self:SetStatus("Failed")
-        self:StopSound("ambient/machines/steam_loop_1.wav")
+        self:StopSound("ambient/fire/fire_small_loop1.wav")
         
         self:EmitSound("ambient/energy/spark" .. math.random(1,6) .. ".wav", 80, 100)
         
@@ -141,7 +141,7 @@ if SERVER then
 
     function ENT:FinishCooking(ply)
         self:SetStatus("Finished")
-        self:StopSound("ambient/machines/steam_loop_1.wav")
+        self:StopSound("ambient/fire/fire_small_loop1.wav")
         self:EmitSound("buttons/button3.wav", 70, 100)
 
         if IsValid(ply) then
@@ -197,7 +197,7 @@ if SERVER then
     end
 
     function ENT:OnRemove()
-        self:StopSound("ambient/machines/steam_loop_1.wav")
+        self:StopSound("ambient/fire/fire_small_loop1.wav")
     end
 end
 
