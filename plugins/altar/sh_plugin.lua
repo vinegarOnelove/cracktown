@@ -43,6 +43,180 @@ PLUGIN.config = {
     maxBlessingsPerPlayer = 10
 }
 
+if CLIENT then
+    -- Безопасное получение статуса с защитными проверками
+    local function GetEntityStatusSafe(ent)
+        if not IsValid(ent) then return "Invalid" end
+        if not isfunction(ent.GetStatus) then return "NoGetStatus" end
+        
+        local status = ent:GetStatus()
+        return status or "Unknown"
+    end
+
+    -- Безопасное получение времени перезарядки
+    local function GetCooldownTimeSafe(ent)
+        if not IsValid(ent) then return 0 end
+        if not isfunction(ent.GetCooldownTime) then return 0 end
+        
+        return ent:GetCooldownTime() or 0
+    end
+
+    -- Безопасное получение оставшегося времени
+    local function GetTimeLeftSafe(ent)
+        if not IsValid(ent) then return 0 end
+        if not isfunction(ent.GetTimeLeft) then return 0 end
+        
+        return ent:GetTimeLeft() or 0
+    end
+
+    -- Безопасное получение текущего благословения
+    local function GetCurrentBlessingSafe(ent)
+        if not IsValid(ent) then return nil end
+        if not isfunction(ent.GetCurrentBlessing) then return nil end
+        
+        return ent:GetCurrentBlessing()
+    end
+
+    -- Кэш для отслеживания уже обработанных entity
+    local processedAltars = {}
+    local lastAltarClearTime = CurTime()
+
+    function PLUGIN:PopulateEntityInfo(ent, tooltip)
+        if ent:GetClass() ~= "ix_bloodaltar" then return end
+
+        -- Очищаем кэш каждую секунду
+        if CurTime() - lastAltarClearTime > 1 then
+            processedAltars = {}
+            lastAltarClearTime = CurTime()
+        end
+
+        -- Проверяем, не обрабатывали ли мы уже эту entity
+        local entIndex = ent:EntIndex()
+        if processedAltars[entIndex] then return end
+        processedAltars[entIndex] = true
+
+        -- Защитные проверки методов
+        if not isfunction(ent.GetStatus) then
+            local row = tooltip:AddRow("error")
+            row:SetText("Ошибка: GetStatus не доступен")
+            row:SetBackgroundColor(Color(255, 0, 0))
+            row:SizeToContents()
+            return
+        end
+
+        -- Безопасное получение данных
+        local status = GetEntityStatusSafe(ent)
+        local cooldownTime = GetCooldownTimeSafe(ent)
+        local timeLeft = GetTimeLeftSafe(ent)
+        local currentBlessing = GetCurrentBlessingSafe(ent)
+
+        -- Заголовок
+        local name = tooltip:AddRow("name")
+        name:SetText("Кровавый Алтарь")
+        name:SetBackgroundColor(Color(150, 0, 0))
+        name:SetImportant()
+        name:SizeToContents()
+
+        -- Статус
+        local statusRow = tooltip:AddRow("status")
+        statusRow:SetText("Статус: " .. (self.altarStatusText[status] or status))
+        
+        -- Цвет статуса в зависимости от состояния
+        if status == "Idle" then
+            statusRow:SetBackgroundColor(Color(50, 50, 50))
+        elseif status == "Accepting" then
+            statusRow:SetBackgroundColor(Color(150, 0, 0))
+        elseif status == "Blessing" then
+            statusRow:SetBackgroundColor(Color(0, 150, 0))
+        elseif status == "Cooldown" then
+            statusRow:SetBackgroundColor(Color(100, 50, 0))
+        else
+            statusRow:SetBackgroundColor(Color(30, 30, 30))
+        end
+        
+        statusRow:SizeToContents()
+
+        -- Дополнительная информация в зависимости от статуса
+        if status == "Accepting" then
+            local acceptRow = tooltip:AddRow("accepting")
+            acceptRow:SetText("Жертва принята!")
+            acceptRow:SetBackgroundColor(Color(100, 0, 0))
+            acceptRow:SizeToContents()
+            
+        elseif status == "Blessing" and currentBlessing then
+            local blessingInfo = self.altarBlessings[currentBlessing]
+            if blessingInfo then
+                local blessingRow = tooltip:AddRow("blessing")
+                blessingRow:SetText("Благословение: " .. blessingInfo.name)
+                blessingRow:SetBackgroundColor(Color(0, 100, 0))
+                blessingRow:SizeToContents()
+                
+                local descRow = tooltip:AddRow("desc")
+                descRow:SetText(blessingInfo.description)
+                descRow:SetBackgroundColor(Color(0, 80, 0))
+                descRow:SizeToContents()
+            end
+            
+        elseif status == "Cooldown" then
+            -- Время перезарядки
+            if cooldownTime > 0 then
+                local timeRow = tooltip:AddRow("cooldown_time")
+                timeRow:SetText("Общее время: " .. cooldownTime .. " сек")
+                timeRow:SetBackgroundColor(Color(80, 40, 0))
+                timeRow:SizeToContents()
+            end
+            
+            -- Оставшееся время
+            if timeLeft > 0 then
+                local timeLeftRow = tooltip:AddRow("time_left")
+                timeLeftRow:SetText("Осталось: " .. math.Round(timeLeft) .. " сек")
+                timeLeftRow:SetBackgroundColor(Color(100, 50, 0))
+                timeLeftRow:SizeToContents()
+                
+                -- Прогресс-бар в текстовом виде
+                local progress = 100 - math.Round((timeLeft / cooldownTime) * 100)
+                local progressRow = tooltip:AddRow("progress")
+                progressRow:SetText("Прогресс: " .. progress .. "%")
+                progressRow:SetBackgroundColor(Color(120, 60, 0))
+                progressRow:SizeToContents()
+            end
+            
+        elseif status == "Idle" then
+            local idleRow = tooltip:AddRow("idle")
+            idleRow:SetText("Готов к принятию жертвы")
+            idleRow:SetBackgroundColor(Color(50, 50, 50))
+            idleRow:SizeToContents()
+            
+            -- Показываем доступные благословения
+            local blessingsRow = tooltip:AddRow("blessings_info")
+            blessingsRow:SetText("Доступные благословения:")
+            blessingsRow:SetBackgroundColor(Color(70, 0, 0))
+            blessingsRow:SizeToContents()
+            
+            for id, blessing in pairs(self.altarBlessings) do
+                local blessingRow = tooltip:AddRow("blessing_" .. id)
+                blessingRow:SetText("- " .. blessing.name .. " (" .. blessing.description .. ")")
+                blessingRow:SetBackgroundColor(Color(60, 0, 0))
+                blessingRow:SizeToContents()
+            end
+        end
+        
+        -- Инструкция по использованию
+        local useRow = tooltip:AddRow("usage")
+        useRow:SetText("Нажмите E для взаимодействия")
+        useRow:SetBackgroundColor(Color(30, 30, 30))
+        useRow:SizeToContents()
+    end
+
+    -- Очистка кэша
+    hook.Add("Think", "ixAltarClearCache", function()
+        if CurTime() - lastAltarClearTime > 0.1 then
+            processedAltars = {}
+            lastAltarClearTime = CurTime()
+        end
+    end)
+end
+
 if SERVER then
     -- Возвращает уровень усиления (0 если нет)
     function PLUGIN:GetBlessingLevel(char, id)

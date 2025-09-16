@@ -3,7 +3,7 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
 
-ENT.PrintName = "Универсальный спавнер машин"
+ENT.PrintName = "Уни324342альный спавнер машин"
 ENT.Category = "Helix"
 ENT.Author = "Your Name"
 ENT.Spawnable = true
@@ -224,7 +224,6 @@ if CLIENT then
         draw.SimpleText("Нажмите E для использования", "DermaDefault", pos.x, pos.y - 25, Color(200, 200, 200), TEXT_ALIGN_CENTER)
         draw.SimpleText("Лимит: " .. spawner:GetSpawnedCount() .. "/" .. spawner.SpawnLimit, "DermaDefault", pos.x, pos.y - 10, Color(200, 200, 200), TEXT_ALIGN_CENTER)
     end)
-	
 end
 
 
