@@ -49,8 +49,10 @@ if SERVER then
                     ply:Notify("ВНИМАНИЕ! Ограбление контейнера!")
                     ply:Notify("Преступник: " .. robberName)
                     
+                    -- Альтернатива HoverText
                     if ix and ix.util then
-                        ix.util.HoverText(ply, "📍 Ограбление контейнера", position, Color(255, 0, 0))
+                        -- Используем альтернативный метод оповещения
+                        ix.util.Notify("Ограбление контейнера", ply)
                     end
                 end
             end
@@ -97,6 +99,7 @@ if SERVER then
         
         self.robber = nil
         self.robberyActive = false
+        self.robberSteamID = nil
     end
 
     -- Сброс состояния ограбления
@@ -106,6 +109,7 @@ if SERVER then
         self:SetStartTime(0)
         self.robber = nil
         self.robberyActive = false
+        self.robberSteamID = nil
         
         if self.robberyTimer then
             timer.Remove(self.robberyTimer)
@@ -142,6 +146,43 @@ if SERVER then
         return false
     end
 
+    -- Новая функция: проверка смерти грабителя
+    function ENT:CheckRobberDeath(victim, attacker)
+        if not IsValid(victim) or not IsValid(self.robber) then return false end
+        
+        if victim == self.robber and self.robberyActive then
+            local killer = IsValid(attacker) and attacker:IsPlayer() and attacker or (IsValid(attacker) and attacker.GetOwner and attacker:GetOwner() and attacker:GetOwner():IsPlayer() and attacker:GetOwner())
+            
+            if IsValid(killer) and killer:GetCharacter() and killer:GetCharacter():GetFaction() == CONFIG.policeFaction then
+                -- Полиция убила грабителя - выдаем награду
+                if PLUGIN and PLUGIN.GivePoliceReward then
+                    PLUGIN:GivePoliceReward(killer, victim, self:EntIndex())
+                else
+                    -- Резервный вариант с проверкой на число :cite[2]:cite[5]
+                    local reward = CONFIG.policeReward
+                    if isnumber(reward) and reward > 0 then
+                        killer:GetCharacter():GiveMoney(reward)
+                        killer:Notify("Вы получили награду за поимку преступника: ☋" .. reward)
+                    else
+                        -- Запасной вариант если награда невалидна
+                        local fallbackReward = 300
+                        killer:GetCharacter():GiveMoney(fallbackReward)
+                        killer:Notify("Вы получили награду за поимку преступника: ☋" .. fallbackReward)
+                    end
+                end
+                
+                ix.chat.Send(nil, "notice", "Преступник пойман полицией! Награда выплачена.", nil, nil, nil)
+            else
+                ix.chat.Send(nil, "notice", "Ограбление провалено! Преступник убит.", nil, nil, nil)
+            end
+            
+            self:ResetRobbery()
+            return true
+        end
+        
+        return false
+    end
+
     function ENT:Use(ply)
         if not IsValid(ply) or not ply:GetCharacter() then return end
         
@@ -173,6 +214,7 @@ if SERVER then
         self:SetRobberyTime(CONFIG.robberyTime)
         self:SetStartTime(CurTime())
         self.robber = ply
+        self.robberSteamID = ply:SteamID64()
         self.robberyActive = true
 
         -- Оповещаем полицию
@@ -225,13 +267,34 @@ if SERVER then
             PLUGIN.activeRobberies[self:EntIndex()] = nil
         end
     end
+
+    -- Хук для проверки смерти игрока
+    hook.Add("PlayerDeath", "ContainerRobbery_EntityDeath", function(victim, inflictor, attacker)
+        for _, ent in pairs(ents.FindByClass("ix_container_robbery")) do
+            if IsValid(ent) and ent.CheckRobberDeath then
+                if ent:CheckRobberDeath(victim, attacker) then
+                    break
+                end
+            end
+        end
+    end)
+
+    hook.Add("OnCharacterDeath", "ContainerRobbery_EntityCharDeath", function(client, inflictor, attacker)
+        for _, ent in pairs(ents.FindByClass("ix_container_robbery")) do
+            if IsValid(ent) and ent.CheckRobberDeath then
+                if ent:CheckRobberDeath(client, attacker) then
+                    break
+                end
+            end
+        end
+    end)
 end
 
 if CLIENT then
     -- Безопасное получение статуса с защитными проверками
     local function GetEntityStatusSafe(ent)
         if not IsValid(ent) then return "Invalid" end
-        if not isfunction(ent.GetStatus) then return "NoGetStatus" end
+        if not ent.GetStatus then return "NoGetStatus" end
         
         local status = ent:GetStatus()
         return status or "Unknown"
@@ -240,7 +303,7 @@ if CLIENT then
     -- Безопасное получение времени ограбления
     local function GetRobberyTimeSafe(ent)
         if not IsValid(ent) then return 0 end
-        if not isfunction(ent.GetRobberyTime) then return 0 end
+        if not ent.GetRobberyTime then return 0 end
         
         return ent:GetRobberyTime() or 0
     end
@@ -248,7 +311,7 @@ if CLIENT then
     -- Безопасное получение времени начала
     local function GetStartTimeSafe(ent)
         if not IsValid(ent) then return 0 end
-        if not isfunction(ent.GetStartTime) then return 0 end
+        if not ent.GetStartTime then return 0 end
         
         return ent:GetStartTime() or 0
     end
@@ -269,7 +332,7 @@ if CLIENT then
     -- Безопасное получение времени перезарядки
     local function GetCooldownEndSafe(ent)
         if not IsValid(ent) then return 0 end
-        if not isfunction(ent.GetCooldownEnd) then return 0 end
+        if not ent.GetCooldownEnd then return 0 end
         
         return ent:GetCooldownEnd() or 0
     end
@@ -316,15 +379,6 @@ if CLIENT then
         local entIndex = ent:EntIndex()
         if processedContainers[entIndex] then return end
         processedContainers[entIndex] = true
-
-        -- Защитные проверки методов
-        if not isfunction(ent.GetStatus) then
-            local row = tooltip:AddRow("error")
-            row:SetText("Ошибка: GetStatus не доступен")
-            row:SetBackgroundColor(Color(255, 0, 0))
-            row:SizeToContents()
-            return
-        end
 
         -- Безопасное получение данных
         local status = GetEntityStatusSafe(ent)
@@ -447,14 +501,19 @@ if CLIENT then
         end
     end)
 
-    -- 3D отображение
+    -- 3D отображение (упрощенная версия)
     function ENT:Draw()
         self:DrawModel()
         
         local distance = self:GetPos():Distance(LocalPlayer():GetPos())
         if distance > 300 then return end
         
-        local status = self:GetStatus()
+        -- Безопасное получение статуса
+        local status = "Unknown"
+        if self.GetStatus then
+            status = self:GetStatus() or "Unknown"
+        end
+        
         local statusText = STATUS_TEXTS[status] or status
         
         local ang = self:GetAngles()
@@ -482,20 +541,6 @@ if CLIENT then
                 color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             draw.SimpleText(statusText, "DermaDefault", 0, 0, 
                 color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-            
-            -- Таймер
-            if status == "Robbing" then
-                local timeLeft = math.Round((self:GetStartTime() + self:GetRobberyTime()) - CurTime())
-                draw.SimpleText(timeLeft .. " сек", "DermaDefault", 0, 15, 
-                    Color(255, 100, 0), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-            elseif status == "Cooldown" then
-                local timeLeft = math.Round(self:GetCooldownEnd() - CurTime())
-                draw.SimpleText(timeLeft .. " сек", "DermaDefault", 0, 15, 
-                    Color(150, 150, 150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-            end
         cam.End3D2D()
     end
-
-    -- Убираем старый HUDPaint хук чтобы не было дублирования
-    hook.Remove("HUDPaint", "ContainerRobberyInfo")
 end
