@@ -1,6 +1,6 @@
 CLASS.name = "Гвардеец"
 CLASS.faction = FACTION_POLICE
-CLASS.limit = 2
+CLASS.limit = 3
 
 function CLASS:OnSet(client)
     local character = client:GetCharacter()
