@@ -1,7 +1,7 @@
 PLUGIN.name = "Corpse Butchering"
 PLUGIN.author = "Bilwin"
 PLUGIN.schema = "Any"
-PLUGIN.version = 1.1
+PLUGIN.version = 1.2  -- Обновили версию
 PLUGIN.license = [[
     This is free and unencumbered software released into the public domain.
     Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -256,6 +256,46 @@ PLUGIN.list = {
     }
 }
 
+-- 🔧 ДОБАВЛЕНА ФУНКЦИЯ: Проверка является ли модель человеческой
+function PLUGIN:IsHumanModel(model)
+    local humanModels = {
+        "models/criken/criken.mdl",
+        "models/player/",
+        "models/humans/",
+        "models/drem/",
+        "models/mrduck/sentry/gangs/",
+        "models/arachnit/",
+        "models/charborg/charborg.mdl"
+    }
+    
+    for _, pattern in ipairs(humanModels) do
+        if string.find(model, pattern, 1, true) then
+            return true
+        end
+    end
+    
+    return false
+end
+
+-- 🔧 ДОБАВЛЕНА ФУНКЦИЯ: Получение дополнительных предметов для ножа сектанта
+function PLUGIN:GetSektantKnifeBonus(client, target)
+    local activeWeapon = client:GetActiveWeapon()
+    if not IsValid(activeWeapon) then return {} end
+    
+    -- Проверяем, используется ли нож сектанта
+    if activeWeapon:GetClass() == "arc9_eft_melee_cultist" then
+        -- Проверяем, является ли модель человеческой
+        if self:IsHumanModel(target:GetModel()) then
+            -- Шанс 50% на выпадение сердца
+            if math.random(1, 100) <= 50 then
+                return {"human_heart"}
+            end
+        end
+    end
+    
+    return {}
+end
+
 if (SERVER) then
     ix.log.AddType("playerButchered", function(client, corpse)
         return string.format("%s был разрублен %s.", client:Name(), corpse:GetModel())
@@ -309,7 +349,7 @@ if (SERVER) then
                 local HitPos = client:GetEyeTraceNoCursor()
                 local target = HitPos.Entity
                 if target and IsValid(target) and target:IsRagdoll() and self.list[target:GetModel()] then
-                    local allowedWeapons = self.list[target:GetModel()].butcheringWeapons or {'arc9_eft_melee_wycc','arc9_eft_melee_voodoo','arc9_eft_melee_kiba','arc9_eft_melee_cultist','arc9_eft_melee_camper','arc9_eft_melee_wycc','arc9_eft_melee_6x5','arc9_eft_melee_fulcrum','arc9_eft_melee_m2','arc9_eft_melee_crash','arc9_eft_melee_sp8','arc9_eft_melee_gladius','arc9_eft_melee_a2607d','arc9_eft_melee_a2607','arc9_eft_melee_akula','arc9_eft_melee_kukri','arc9_eft_melee_taiga'}
+                    local allowedWeapons = self.list[target:GetModel()].butcheringWeapons or {'arc9_eft_melee_wycc','arc9_eft_melee_voodoo','arc9_eft_melee_kiba','arc9_eft_melee_cultist','arc9_eft_melee_camper','arc9_eft_melee_wycc','arc9_eft_melee_6x5','arc9_eft_melee_fulcrum','arc9_eft_melee_m2','arc9_eft_melee_crash','arc9_eft_melee_sp8','arc9_eft_melee_gladius','arc9_eft_melee_a2607d','arc9_eft_melee_a2607','arc9_eft_melee_akula','arc9_eft_melee_kukri','arc9_eft_melee_taiga'}  -- 🔧 ДОБАВЛЕН нож сектанта
                     local canButch = hook.Run('CanButchEntity', client, target)
                     if ( table.HasValue(allowedWeapons, client:GetActiveWeapon():GetClass()) and !target:GetNetVar('cutting', false) and client:IsWepRaised() and canButch ) then
                         local butchAnim = self.list[target:GetModel()].animation or "Roofidle1"
@@ -337,6 +377,13 @@ if (SERVER) then
                                     util.Effect(self.list[target:GetModel()].impactEffect or "BloodImpact", effect)
 
                                     local butcheringItems = self.list[target:GetModel()].items or {}
+                                    
+                                    -- 🔧 ДОБАВЛЕНО: Получаем бонусные предметы для ножа сектанта
+                                    local bonusItems = self:GetSektantKnifeBonus(client, target)
+                                    for _, item in ipairs(bonusItems) do
+                                        table.insert(butcheringItems, item)
+                                    end
+                                    
                                     if !table.IsEmpty(butcheringItems) then
                                         for _, item in ipairs(butcheringItems) do
                                             if !client:GetCharacter():GetInventory():Add(item) then
@@ -366,6 +413,25 @@ if (SERVER) then
 
     function PLUGIN:CanButchEntity(client, target)
         return true
+    end
+    
+    -- 🔧 ДОБАВЛЕН ХУК: При разделке человека ножом сектанта
+    function PLUGIN:OnButchered(client, target)
+        local activeWeapon = client:GetActiveWeapon()
+        if IsValid(activeWeapon) and activeWeapon:GetClass() == "arc9_eft_melee_cultist" then
+            if self:IsHumanModel(target:GetModel()) then
+                client:Notify("Больше крови, богу крови!")
+                
+                -- Можно добавить дополнительные эффекты здесь
+                local effect = EffectData()
+                effect:SetOrigin(client:GetPos() + Vector(0, 0, 50))
+                effect:SetMagnitude(1)
+                effect:SetScale(2)
+                util.Effect("BloodImpact", effect)
+                
+                client:EmitSound("physics/flesh/flesh_bloody_break.wav")
+            end
+        end
     end
 end
 
