@@ -1,4 +1,3 @@
-
 ITEM.name = "Кусок птицы"
 ITEM.model = Model("models/gore/rleg_meatbit004r.mdl")
 ITEM.description = "Куски перьев, куски мяса, есть можно."
