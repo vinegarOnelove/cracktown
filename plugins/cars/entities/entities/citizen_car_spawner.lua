@@ -3,7 +3,7 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
 
-ENT.PrintName = "Уни324342альный спавнер машин"
+ENT.PrintName = "Спавнер машины оппозиции"
 ENT.Category = "Helix"
 ENT.Author = "Your Name"
 ENT.Spawnable = true
@@ -12,8 +12,8 @@ ENT.AdminSpawnable = true
 -- Конфигурация спавнера
 ENT.UseCooldown = 1
 ENT.SpawnLimit = 1 -- Лимит машин на этот спавнер
-ENT.VehicleClass = "monaco_police_glide" -- Класс машины по умолчанию
-ENT.AllowedFaction = FACTION_POLICE -- Фракция по умолчанию
+ENT.VehicleClass = "van_glide" -- Класс машины по умолчанию
+ENT.AllowedFaction = FACTION_CITIZEN -- Фракция по умолчанию
 ENT.SpawnOffset = Vector(-250, 0, 10) -- Смещение для спавна
 
 function ENT:SetupDataTables()
@@ -62,7 +62,7 @@ function ENT:Use(ply)
 
         -- Проверка лимита спавнера
         if self:GetSpawnedCount() >= self.SpawnLimit then
-            ply:ChatPrint("Лимит машин для этого спавнера исчерпан!")
+            ply:ChatPrint("Машины кончились!")
             return
         end
 
@@ -85,7 +85,7 @@ function ENT:Use(ply)
         })
 
         if tr.Hit then
-            ply:ChatPrint("Место для спавна занято!")
+            ply:ChatPrint("Место для вызова машины занято!")
             return
         end
 
@@ -195,7 +195,7 @@ if CLIENT then
             surface.DrawOutlinedRect(-80, -30, 160, 60, 2)
 
             -- Основной текст
-            draw.SimpleText("СПАВНЕР МАШИН", "DermaDefaultBold", 0, -15,
+            draw.SimpleText("ВЫЗВАТЬ РУХЛЯДЬ", "DermaDefaultBold", 0, -15,
                 Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             
             -- Информация о лимите
