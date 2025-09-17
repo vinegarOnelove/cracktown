@@ -1,6 +1,6 @@
 ITEM.name = "Яблоко Восстановления"
 ITEM.description = ""
-ITEM.category = "Arts"
+ITEM.category = "Артефакты"
 ITEM.model = "models/gore/debris_goredebris02.mdl"
 ITEM.width = 2
 ITEM.armorAmount = 5

@@ -1,6 +1,6 @@
 ITEM.name = "Регенерирующийся Металл"
 ITEM.description = ""
-ITEM.category = "Arts"
+ITEM.category = "Артефакты"
 ITEM.model = "models/props_debris/metal_panelchunk02d.mdl"
 ITEM.width = 2
 ITEM.armorAmount = 0

@@ -1,6 +1,6 @@
 ITEM.name = "Куб Гравитации"
 ITEM.description = ""
-ITEM.category = "Arts"
+ITEM.category = "Артефакты"
 ITEM.model = "models/Combine_Helicopter/helicopter_bomb01.mdl"
 ITEM.width = 2
 ITEM.armorAmount = 5
