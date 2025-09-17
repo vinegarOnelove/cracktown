@@ -8,7 +8,7 @@ PLUGIN.plantTypes = {
     ["weed"] = {
         name = "Конопля",
         model = "models/props_lab/minitexture.mdl",
-        growTime = 300,
+        growTime = 300,	
         yield = {min = 2, max = 5},
         seed = "weed_seed",
         product = "weed",

@@ -4,7 +4,7 @@
 
 FACTION.name = "Пришельцы"
 FACTION.description = "Зиб - зоб, зип - зип."
-FACTION.isDefault = true
+FACTION.isDefault = false
 FACTION.color = Color(205, 205, 205)
 FACTION.models = {
     "models/ebmage/newflesh/gnorts.mdl"
