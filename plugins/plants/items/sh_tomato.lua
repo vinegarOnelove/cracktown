@@ -1,5 +1,5 @@
 ITEM.name = "Помидор"
-ITEM.model = "models/props_lab/jar01b.mdl"
+ITEM.model = "models/props_junk/garbage_takeoutcarton001a.mdl"
 ITEM.description = "Сочный и вкусный помидор."
 ITEM.width = 1
 ITEM.height = 1

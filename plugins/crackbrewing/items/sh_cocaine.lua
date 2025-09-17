@@ -1,5 +1,5 @@
 ITEM.name = "Кокаин"
-ITEM.model = "models/props_lab/jar01b.mdl"
+ITEM.model = "models/props_lab/jar01a.mdl"
 ITEM.description = "Пакет с белым порошком."
 ITEM.width = 1
 ITEM.height = 1
