@@ -6,10 +6,11 @@ ITEM.width = 1 -- Width and height refer to how many grid spaces this item takes
 ITEM.height = 1
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(509.64, 427.61, 310.24),
-	ang = Angle(24.9, 220.23, 0),
-	fov = 0.48
+	pos = Vector(706.9, -35.52, 199.7),
+	ang = Angle(16.24, 177.2, 0),
+	fov = 0.61
 }
+
 
 
 -- Items will be purchasable through the business menu. To disable the purchasing of this item, we specify ITEM.noBusiness.

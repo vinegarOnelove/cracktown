@@ -4,76 +4,21 @@ ITEM.category = "Armor"
 ITEM.model = "models/Gibs/HGIBS.mdl"
 ITEM.width = 1
 ITEM.armorAmount = 1
-ITEM.resiAmount = 1
 ITEM.height = 1
 ITEM.outfitCategory = "model"
-ITEM.gasmask = false
-ITEM.resistance = false
 ITEM.pacData = {}
-ITEM.damage = {1, 1, 1, 1, 1, 1, 1}
 
 function ITEM:GetDescription()
-	if (self.entity) then
-		return L(self.description)
-	else
-        return L(self.description .. "\n \nResistance: \n  Bulletproof: " .. (self.damage[1]) .. "\n  Evisceration: " .. (self.damage[2]) .. "\n  Electricity: " .. (self.damage[3]) .. "\n  Burn: " .. (self.damage[4]) .. "\n  Radiation: " .. (self.damage[5]) .. "\n  Chemical: " .. (self.damage[6]) .. "\n  Shock: " .. (self.damage[7]))
-	end
+	return L(self.description)
 end
 
 local function armorPlayer(client, target, amount)
 	hook.Run("OnPlayerArmor", client, target, amount)
 
 	if (client:Alive() and target:Alive()) then
-			target:SetArmor(amount)
+		target:SetArmor(amount)
 	end
 end
-
--- Функция для повторного применения брони при возрождении
-local function reapplyArmorOnSpawn(client)
-	local character = client:GetCharacter()
-	if not character then return end
-	
-	local inventory = character:GetInventory()
-	if not inventory then return end
-	
-	-- Ищем экипированную броню в инвентаре
-	for _, item in pairs(inventory:GetItems()) do
-		if item.isArmor and item:GetData("equip") then
-			-- Применяем броню снова
-			if item.gasmask == true then
-				client:SetNetVar("gasmask", true)
-			else
-				client:SetNetVar("gasmask", false)
-			end
-			
-			if item.resistance == true then
-				client:SetNetVar("resistance", true)
-			else
-				client:SetNetVar("resistance", false)
-			end
-			
-			client:SetNWFloat("dmg_bullet", item.damage[1])
-			client:SetNWFloat("dmg_slash", item.damage[2])
-			client:SetNWFloat("dmg_shock", item.damage[3])
-			client:SetNWFloat("dmg_burn", item.damage[4])
-			client:SetNWFloat("dmg_radiation", item.damage[5])
-			client:SetNWFloat("dmg_acid", item.damage[6])
-			client:SetNWFloat("dmg_explosive", item.damage[7])
-			
-			armorPlayer(client, client, item.armorAmount)
-			break
-		end
-	end
-end
-
--- Хук для отслеживания возрождения игрока
-hook.Add("PlayerSpawn", "ArmorRespawnHook", function(client)
-	timer.Simple(0.1, function() -- Небольшая задержка для гарантии загрузки инвентаря
-		if IsValid(client) then
-			reapplyArmorOnSpawn(client)
-		end
-	end)
-end)
 
 -- Inventory drawing
 if (CLIENT) then
@@ -87,9 +32,6 @@ end
 
 function ITEM:RemoveOutfit(client)
 	local character = client:GetCharacter()
-			
-	client:SetNetVar("gasmask", false)
-	client:SetNetVar("resistance", false)
 
 	armorPlayer(client, client, 0)
 
@@ -136,8 +78,6 @@ function ITEM:RemoveOutfit(client)
 	self:OnUnequipped()
 end
 
--- makes another outfit depend on this outfit in terms of requiring this item to be equipped in order to equip the attachment
--- also unequips the attachment if this item is dropped
 function ITEM:AddAttachment(id)
 	local attachments = self:GetData("outfitAttachments", {})
 	attachments[id] = true
@@ -158,14 +98,13 @@ function ITEM:RemoveAttachment(id, client)
 end
 
 ITEM:Hook("drop", function(item)
-	local client = item.player
 	if (item:GetData("equip")) then
 		item:RemoveOutfit(item:GetOwner())
 		armorPlayer(item.player, item.player, 0)
 	end
 end)
 
-ITEM.functions.EquipUn = { -- sorry, for name order.
+ITEM.functions.EquipUn = {
 	name = "Unequip",
 	tip = "equipTip",
 	icon = "icon16/cross.png",
@@ -173,11 +112,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 		local client = item.player
 		
 		armorPlayer(item.player, item.player, 0)
-		
 		item:RemoveOutfit(item.player)
-		
-		client:SetNetVar("gasmask", false)
-		client:SetNetVar("resistance", false)
 		
 		return false
 	end,
@@ -210,29 +145,7 @@ ITEM.functions.Equip = {
 		end
 
 		item:SetData("equip", true)
-		item.isArmor = true -- Помечаем предмет как броню для поиска при возрождении
-		
-		if (item.gasmask == true) then
-			client:SetNetVar("gasmask", true)
-		else
-			client:SetNetVar("gasmask", false)
-		end
-		
-		if (item.resistance == true) then
-			client:SetNetVar("resistance", true)
-		else
-			client:SetNetVar("resistance", false)
-		end
-		
-		client:SetNWFloat("dmg_bullet", item.damage[1])
-		client:SetNWFloat("dmg_slash", item.damage[2])
-		client:SetNWFloat("dmg_shock", item.damage[3])
-		client:SetNWFloat("dmg_burn", item.damage[4])
-		client:SetNWFloat("dmg_radiation", item.damage[5])
-		client:SetNWFloat("dmg_acid", item.damage[6])
-		client:SetNWFloat("dmg_explosive", item.damage[7])
-		
-		item.player:EmitSound("snd_jack_clothequip.wav", 80)
+		item.player:EmitSound("npc/stalker/stalker_footstep_left2.wav", 80)
 		armorPlayer(item.player, item.player, item.armorAmount)
 
 		if (type(item.OnGetReplacement) == "function") then
@@ -310,7 +223,7 @@ end
 function ITEM:OnRemoved()
 	if (self.invID != 0 and self:GetData("equip")) then
 		self.player = self:GetOwner()
-			self:RemoveOutfit(self.player)
+		self:RemoveOutfit(self.player)
 		self.player = nil
 	end
 end
@@ -324,3 +237,4 @@ end
 function ITEM:CanEquipOutfit()
 	return true
 end
+

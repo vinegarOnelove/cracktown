@@ -4,6 +4,13 @@ ITEM.description = "Стационарный телефон с перереза�
 ITEM.width = 1
 ITEM.height = 1
 ITEM.category = "Электроника"
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-142.66, -126.18, -44.88),
+	ang = Angle(-17.93, 40.22, 0),
+	fov = 4.28
+}
+
 
 ITEM.functions.Call = {
     name = "Позвонить курьеру",
