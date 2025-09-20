@@ -32,7 +32,7 @@ ix.anim.SetModelClass("models/as/necromancer.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/as/necromancer_skeleton.mdl", "player") -- Freedom
 ix.anim.SetModelClass("models/as/necromancerloomis.mdl", "player") -- Duty
 ix.anim.SetModelClass("models/as/playermodel/darkbrad.mdl", "player") -- Duty
-ix.anim.SetModelClass("models/flaymi/anomaly/stalker_dolg/stalker_dolg4a.mdl", "player") -- Duty
+ix.anim.SetModelClass("models/jessev92/player/l4d/m9-hunter.mdl", "player") -- Duty
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_dolg/stalker_dolg4b.mdl", "player") -- Duty
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_dolg/stalker_dolg4c.mdl", "player") -- Duty
 ix.anim.SetModelClass("models/flaymi/anomaly/stalker_dolg/stalker_dolg2a.mdl", "player") -- Duty

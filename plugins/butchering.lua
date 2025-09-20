@@ -207,10 +207,10 @@ PLUGIN.list = {
         impactEffect = "BloodImpact",
         items = {'dog_part'}
     },
-	['models/animalia/crow.mdl'] = {
+	['models/jessev92/player/l4d/m9-hunter.mdl'] = {
         butcheringTime = 10,
         impactEffect = "BloodImpact",
-        items = {'bird_part'}
+        items = {'human_part','human_brain'}
     },
 	['models/animalia/pigeon.mdl'] = {
         butcheringTime = 10,

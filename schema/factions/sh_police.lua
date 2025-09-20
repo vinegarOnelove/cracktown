@@ -8,6 +8,7 @@ FACTION.color = Color(45, 145, 210)
 FACTION.pay = 10 -- How much money every member of the faction gets paid at regular intervals.
 FACTION.isGloballyRecognized = true -- Makes it so that everyone knows the name of the characters in this faction.
 FACTION.isDefault = true
+FACTION.uniqueID = "sh_police"
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 	inventory:Add("paxica_wricht", 1)
