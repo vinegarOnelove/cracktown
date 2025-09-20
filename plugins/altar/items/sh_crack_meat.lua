@@ -13,7 +13,7 @@ ITEM.iconCam = {
 
 ITEM.functions.Use = {
     name = "Употребить",
-    icon = "icon16/lightning_red.png",
+    icon = "icon16/lightning.png",
     OnRun = function(item)
         local client = item.player
         if not IsValid(client) then return false end
