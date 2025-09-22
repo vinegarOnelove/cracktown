@@ -6,7 +6,7 @@ ITEM.height = 1
 ITEM.category = "Семена";
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(51.87, 20.64, 263.62),
-	ang = Angle(78.34, 202.73, 0),
-	fov = 3.75
+	pos = Vector(21.47, 9.8, 268.43),
+	ang = Angle(85.12, 206.65, 0),
+	fov = 3.95
 }
