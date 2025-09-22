@@ -4,7 +4,7 @@ local PLUGIN = PLUGIN;
 
 ENT.Base = "base_anim";
 ENT.Type = "anim";
-ENT.PrintName = "Brewing Barrel";
+ENT.PrintName = "Бочка для варки";
 ENT.Category = "Helix";
 ENT.Spawnable = true;
 ENT.RenderGroup = RENDERGROUP_BOTH;

@@ -1,8 +1,8 @@
-ITEM.name = "Hawk"
+ITEM.name = "HAWK"
 ITEM.description = ""
 ITEM.model = "models/weapons/arc9/darsu_eft/w_melee_voodoo.mdl"
 ITEM.class = "arc9_eft_melee_voodoo"
-ITEM.weaponCategory = "специального оружия"
+ITEM.weaponCategory = "ближнего оружия"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.exRender = true 

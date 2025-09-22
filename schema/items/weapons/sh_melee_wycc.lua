@@ -1,8 +1,8 @@
-ITEM.name = "Topor"
+ITEM.name = "Топор"
 ITEM.description = ""
 ITEM.model = "models/weapons/arc9/darsu_eft/w_melee_wycc_axe.mdl"
 ITEM.class = "arc9_eft_melee_wycc"
-ITEM.weaponCategory = "специального оружия"
+ITEM.weaponCategory = "ближнего оружия"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.exRender = true

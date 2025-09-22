@@ -1,8 +1,8 @@
-ITEM.name = "Akula"
+ITEM.name = "Акула"
 ITEM.description = ""
 ITEM.model = "models/weapons/arc9/darsu_eft/w_melee_dagger.mdl"
 ITEM.class = "arc9_eft_melee_akula"
-ITEM.weaponCategory = "melee"
+ITEM.weaponCategory = "ближнего оружия"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.exRender = true 

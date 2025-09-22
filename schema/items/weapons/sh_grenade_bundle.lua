@@ -6,6 +6,7 @@ ITEM.weaponCategory = "специального оружия"
 ITEM.width = 2
 ITEM.height = 2
 ITEM.exRender = true
+ITEM.isGrenade = true
 ITEM.iconCam = {
 	pos = Vector(0, 200, 0),
 	ang = Angle(1.79, 270.05, 0),

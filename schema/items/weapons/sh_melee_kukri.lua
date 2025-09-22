@@ -1,8 +1,8 @@
-ITEM.name = "Kukri"
+ITEM.name = "Кукри М48"
 ITEM.description = ""
 ITEM.model = "models/weapons/arc9/darsu_eft/w_melee_kukri.mdl"
 ITEM.class = "arc9_eft_melee_kukri"
-ITEM.weaponCategory = "специального оружия"
+ITEM.weaponCategory = "ближнего оружия"
 ITEM.width = 1
 ITEM.height = 2
 ITEM.exRender = true 
