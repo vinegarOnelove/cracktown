@@ -1,0 +1,20 @@
+LANGUAGE = {
+  jackpotFrame2 = "No te preocupes",
+  jackpotFrame3 = "Esto no es un fallo",
+  jackpotFrame4 = "Tengo algo",
+  jackpotFrame4variant = "que decirte",
+  jackpotFrame5 = "Algo importante",
+  jackpotFrame6 = "Felicidades",
+  jackpotFrame7 = "Acabas de",
+  jackpotFrame7variant = "ganar...",
+  jackpotFrame9 = "¡EL GORDO!",
+  dobCashout = "¡HAS GANADO!",
+  dobCurrentUser = "Usuario actual: ",
+  dobJackpotText = "Dobla 10 veces para ganar el Jackpot",
+  dobNotifySwitch = "Por favor, espera antes de cambiar de máquina.",
+  dobMachineBelongs = "Ahora mismo está jugando %s. Espera a que termine su turno para jugar.",
+  dobNotEnoughMoney = "No tienes suficiente dinero para jugar.",
+  dobPerGame = "POR PARTIDA",
+  wolWonMoneyNoti = "¡Has ganado $%s en la Ruleta de la Suerte!",
+  wolWonJackpotNoti = "¡%s ha ganado el bote de $%s en la Ruleta de la Suerte!"
+}
